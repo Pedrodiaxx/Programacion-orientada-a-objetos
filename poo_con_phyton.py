@@ -1,60 +1,63 @@
-class personaje:
+class Personaje:
+    # Constructor de la clase
     def __init__(self, nombre, fuerza, inteligencia, defensa, vida):
-        self.nombre = nombre
-        self.fuerza= fuerza
-        self.inteligencia= inteligencia
-        self.defensa = defensa
-        self.vida = vida
+        self.__nombre = nombre
+        self.__fuerza = fuerza
+        self.__inteligencia = inteligencia
+        self.__defensa = defensa
+        self.__vida = vida
 
     def imprimir_atributos(self):
-        print(self.nombre)
-        print("-fuerza:", self. fuerza)
-        print("-inteligencia", self. inteligencia)
-        print("-defensa:", self. defensa)
-        print("-vida:", self. vida)
-    
+        print(self.__nombre)
+        print("-fuerza:", self.__fuerza)
+        print("-inteligencia:", self.__inteligencia)
+        print("-defensa:", self.__defensa)
+        print("-vida:", self.__vida)
+
     def subir_nivel(self, fuerza, inteligencia, defensa):
-        self.fuerza = self.fuerza + fuerza
-        self.inteligencia = self.inteligencia + inteligencia
-        self.defensa = self.defensa + defensa
-    def esta_vivo(self):
-        return self.vida > 0
-    def morir(self):
-         self.vida < 0
-    def dañar(self, enemigo):
-        return self.fuerza - enemigo.defensa
-    def atacar(self, enemigo):
-        daño = self.dañar(enemigo)
-        enemigo.vida = enemigo.vida - daño
-        print(self.nombre, "ha realizado", daño, "puntos de daño a", enemigo.nombre)
-        print("vida de", enemigo.nombre, "es", enemigo.vida)
-        if daño <= 0:
-            enemigo.vida  = 0
-        else:
-            print("vida de", enemigo.nombre, "es", enemigo. vida)
+        self.__fuerza += fuerza
+        self.__inteligencia += inteligencia
+        self.__defensa += defensa
     
+    def esta_vivo(self):
+        return self.__vida > 0
+    
+    def __morir(self): 
+        return self.__vida <= 0
+    
+    def dmg(self, enemigo):
+        return max(self.__fuerza - enemigo.__defensa, 1)
+    
+    def dmgRecibido(self, enemigo):
+        dmg = self.dmg(enemigo)
+        enemigo.__vida = max(enemigo.__vida - dmg, 0)
+        print(self.__nombre, "Ha realizado", dmg, "puntos de daño a", enemigo.__nombre)
+        if enemigo.esta_vivo():
+            print("Vida de", enemigo.__nombre, "es", enemigo.__vida)
+        else:
+            print(enemigo.__nombre, "ha muerto")
+    def get_fuerza(self):
+        return self.__fuerza
+    
+    def set_fuerza(self,fuerza):
+        if fuerza < 0:
+            print("error, valor negativo")
+        else:
+            self.__fuerza = fuerza
+        self.__fuerza = fuerza
 
-            
-#variable de constructor pasivo de la clase
-mi_personaje = personaje("Dante", 40, 3,70, 100)
-mi_personaje.imprimir_atributos()
-mi_enemigo = personaje("Vergil", 70, 30,70,100)
-mi_personaje.atacar(mi_enemigo)
-mi_enemigo.imprimir_atributos()
 
-#print(mi_personaje.dañar(mi_enemigo))
-#print(mi_personaje.esta_vivo())
-# mi_personaje.subir_nivel(10,1,5)
-# print("--------------")
+# Variable de constructor vacío de la clase
+mi_personaje = Personaje("Dante", 100, 3, 70, 100)
 # mi_personaje.imprimir_atributos()
-# mi_personaje.nombre = "chemafighther"
-# mi_personaje. fuerza = 30
-# mi_personaje.inteligencia = 12
-# mi_personaje.defensa = 28
-# mi_personaje.vida = 3
-
-# print("el nombre del personaje es", mi_personaje. nombre)
-# print("La fuerza de personaje  es", mi_personaje. fuerza)
-# print("el inteligencia del personaje es", mi_personaje. inteligencia)
-# print("el defensa del personaje es", mi_personaje. defensa)
-# print("el vida del personaje es", mi_personaje. vida)
+# print(mi_personaje.esta_vivo())
+# print(mi_personaje.morir())
+#mi_personaje.fuerza
+# mi_personaje.fuerza = 0
+# mi_personaje.imprimir_atributos()
+mi_personaje.set_fuerza(-5)
+print(mi_personaje.get_fuerza())
+#mi_personaje.morir
+mi_enemigo = Personaje("Bergel", 70, 30, 70, 100)
+# mi_personaje.dmgRecibido(mi_enemigo)
+# mi_enemigo.imprimir_atributos()
