@@ -1,10 +1,4 @@
 class personaje:
-    # nombre = 'Default'
-    # fuerza = 0
-    # inteligencia = 0
-    # defensa = 0
-    # vida= 0
-    #constructor de la clase
     def __init__(self, nombre, fuerza, inteligencia, defensa, vida):
         self.nombre = nombre
         self.fuerza= fuerza
@@ -34,16 +28,23 @@ class personaje:
         enemigo.vida = enemigo.vida - daño
         print(self.nombre, "ha realizado", daño, "puntos de daño a", enemigo.nombre)
         print("vida de", enemigo.nombre, "es", enemigo.vida)
+        if daño <= 0:
+            enemigo.vida  = 0
+        else:
+            print("vida de", enemigo.nombre, "es", enemigo. vida)
+class guerrero (personajes):
+    pass
+
+tlatoani = guerrer("Apocalipto", 50,70,30,100)
     
 
             
 #variable de constructor pasivo de la clase
-mi_personaje = personaje("Dante", 100, 3,70, 100)
-mi_personaje.imprimir_atributos
-mi_enemigo = personaje("Vergil", 70, 30,70,100)
-mi_personaje.atacar(mi_enemigo)
-mi_enemigo.imprimir_atributos
-
+# mi_personaje = personaje("Dante", 40, 3,70, 100)
+# mi_personaje.imprimir_atributos()
+# mi_enemigo = personaje("Vergil", 70, 30,70,100)
+# mi_personaje.atacar(mi_enemigo)
+# mi_enemigo.imprimir_atributos()
 
 #print(mi_personaje.dañar(mi_enemigo))
 #print(mi_personaje.esta_vivo())
